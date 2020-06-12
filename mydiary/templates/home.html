@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %} Homepage {% endblock %}
+
+{% block head %}
+<h1 style="text-align:center">My Diary</h1>
+{% endblock %}
+
+
+
+{% block body %}
+<div class="content">
+  <table>
+    <tr>
+      <th>Entry</th>
+      <th>Date Added</th>
+      <th>Actions</th>
+    </tr>
+    {% for entry in entries %}
+
+
+      <tr>
+        <td>{{ entry.title }} </td>
+        <td>{{ entry.date_created.date() }} </td>
+        <td>
+          <a href="/view/{{entry.id}}"> View </a>
+          <br>
+          <a href="/delete/{{entry.id}}"> Delete </a>
+        </td>
+      </tr>
+    {% endfor %}
+
+
+
+  </table>
+</div>
+
+<form  action="/" method="POST">
+  <input  type="text" name="title" value="Title">
+  <br>
+
+  <textarea  value="Entry" name="content" rows="4" cols="50">
+  </textarea>
+  <br>
+  <input  type="submit" value="Add Entry">
+</form>
+{% endblock %}
